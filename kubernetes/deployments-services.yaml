@@ -16,7 +16,7 @@ spec:
       - name: node-app
         image: your_docker_hub_name/nodejs_image_name:latest
         ports:
-        - containerPort: 3001
+        - containerPort: 8000
 
 
 ---
@@ -32,8 +32,8 @@ spec:
    app: node-app
   type: ClusterIP
   ports:
-  - port: 3001
-    targetPort: 3001
+  - port: 8000
+    targetPort: 8000
 
 
 ---
@@ -41,19 +41,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-app
+  name: webapp
 spec:
   selector:
     matchLabels:
-      app: nginx-app
+      app: webapp
   replicas: 1
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: webapp
     spec:
       containers:
-      - name: nginx-app
+      - name: webapp
         image: your_docker_hub_name/name_of_webapp_image:latest
         ports:
         - containerPort: 80
@@ -62,12 +62,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-app
+  name: webapp
   labels:
-    app: nginx-app
+    app: webapp
 spec:
   selector:
-   app: nginx-app
+   app: webapp
   type: NodePort
   ports:
   - port: 80
