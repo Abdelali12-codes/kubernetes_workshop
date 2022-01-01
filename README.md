@@ -117,4 +117,8 @@ kubectl get pods
 ```
 * to see your app, type below command
 ```
-minikube service --url name_of_your_service_of_nginx_deployment (
+minikube service --url name_of_your_service_of_nginx_deployment (webapp in our case)
+```
+* type the url that will appear on the terminal (keep the terminal opened) and paste the url on the browser tab
+
+* if you want to see the nodejs app add the /nodeapp to the url you have copied
