@@ -2,6 +2,11 @@
 
 ## build the local images and push them to dockerhub to use them later by kubernetes
 
+### start the minikube
+```
+minikube start
+```
+
 ### build the nodejs app 
 
 * get in the root project and run the command below:
@@ -61,5 +66,55 @@ kubectl exec -it name_of_pod bash
 kubectl exec -it name_of_pod -c name_of_container bash
 ```
 
-* apply ya
+* to create kubernetes workload configured on yaml file, we use the below command:
+````
+kubectl apply -f name_of_file.yaml 
+```
+* to delete the previous workload use the below command:
+```
+kubectl delete -f name_of_file_of_that_workload.yaml
+```
+## Rolling back deployment
 
+* to set the status of the rollou, we use :
+```
+kubectl rollout status deployment/name_of_deployment
+```
+* to see the history of the rollout:
+```
+kubectl rollout history deployment/name_of_deployment
+```
+* roll back to previous revision
+```
+kubectl rollout undo deployment/name_of_deployment
+```
+
+* roll out to specific revision:
+```
+kubectl rollout undo deployment/name_of_deployment --to-revision=x
+```
+
+* scaling deployment
+```
+kubectl scale deployment/name_of_deployment --replicas=10
+```
+* auto scaling (horizantal scaling )
+```
+kubectl autoscale deployment/nginx-deployment --min=6 --max=15 --cpu-percent=50
+```
+
+### implementation 
+
+* run our deployments and services after we have pushed our images to dockerhub
+
+````
+kubectl apply -f kubernetes/deployments-services.yaml
+```
+* check wether if all the pods running succefully
+
+```
+kubectl get pods
+```
+* to see your app, type below command
+```
+minikube service --url name_of_your_service_of_nginx_deployment (
