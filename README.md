@@ -67,7 +67,7 @@ kubectl exec -it name_of_pod -c name_of_container bash
 ```
 
 * to create kubernetes workload configured on yaml file, we use the below command:
-````
+```
 kubectl apply -f name_of_file.yaml 
 ```
 * to delete the previous workload use the below command:
@@ -107,7 +107,7 @@ kubectl autoscale deployment/nginx-deployment --min=6 --max=15 --cpu-percent=50
 
 * run our deployments and services after we have pushed our images to dockerhub
 
-````
+```
 kubectl apply -f kubernetes/deployments-services.yaml
 ```
 * check wether if all the pods running succefully
